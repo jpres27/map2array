@@ -32,10 +32,15 @@ int main (int argc, char **argv) {
         collisionMap.push_back (v);                 // add row vector to array
     }
 
-    outputfile << "int collisionMap[" << collisionMap[0].size() << "] [" << collisionMap.size() << "] = {";
+    std::string delim = "";                         // set a delimiter so we don't get a comma before the first value
+    outputfile << "int collisionMap[" << collisionMap[0].size() << "][" << collisionMap.size() << "] = {";
     for (auto& row : collisionMap) {                // iterate over rows
-        for (auto& val : row)                       // iterate over vals
-            outputfile << val << ", ";              // output to file
+        for (auto& val : row) {                     // iterate over vals
+            outputfile << delim << val;             // output to file
+            delim = ", ";                           // update delimiter so we have commas except for the last value
+            }               
     }
+    outputfile << "};";
     outputfile.close();
+    return 0;
 }
