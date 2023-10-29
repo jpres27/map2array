@@ -22,19 +22,20 @@ int main (int argc, char **argv) {
     }
 
     std::string line, val;                
-    std::vector<std::vector<int>> array;    // vector of int vectors
+    std::vector<std::vector<int>> collisionMap;     // vector of int vectors
 
     while (std::getline (inputfile, line)) {        // read line in
-        std::vector<int> v;                 // row vector
+        std::vector<int> v;                         // row vector
         std::stringstream s (line);
-        while (getline (s, val, ','))       // get each value (',' delimited)
-            v.push_back (std::stoi (val));  // add to row vector
-        array.push_back (v);                // add row vector to array
+        while (getline (s, val, ','))               // get each value (',' delimited)
+            v.push_back (std::stoi (val));          // add to row vector
+        collisionMap.push_back (v);                 // add row vector to array
     }
 
-    for (auto& row : array) {               // iterate over rows
-        for (auto& val : row)               // iterate over vals
-            outputfile << "output placeholder" << std::endl; // output to file
+    outputfile << "int collisionMap[" << collisionMap[0].size() << "] [" << collisionMap.size() << "] = {";
+    for (auto& row : collisionMap) {                // iterate over rows
+        for (auto& val : row)                       // iterate over vals
+            outputfile << val << ", ";              // output to file
     }
     outputfile.close();
 }
